@@ -189,8 +189,6 @@ a {
 .nav-toggle span::after {
   content: '';
   position: absolute;
-  left: 9px;
-  right: 9px;
   height: 2px;
   background: var(--ink);
   border-radius: 2px;
@@ -198,7 +196,18 @@ a {
 }
 
 .nav-toggle span {
+  left: 9px;
+  right: 9px;
   top: 19px;
+}
+
+/* Relative to the already-inset `span` box above, not to `.nav-toggle` again -
+   left/right: 0 here (not 9px) so these two bars span the full width of that
+   box instead of getting inset a second time into unreadable 4px-wide dashes. */
+.nav-toggle span::before,
+.nav-toggle span::after {
+  left: 0;
+  right: 0;
 }
 
 .nav-toggle span::before {
