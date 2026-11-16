@@ -784,3 +784,71 @@ footer .copyright {
     padding: 2.5rem 1.5rem;
   }
 }
+
+/* Waitlist form - replaces store badges while Rawda isn't live on the stores yet. */
+.waitlist-form {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.waitlist-form input[type='email'] {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.waitlist-form input[type='email']:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.waitlist-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+
+.waitlist-status {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-top: 0.6rem;
+  min-height: 1.2em;
+}
+
+.cta-band .waitlist-note {
+  color: rgba(247, 242, 231, 0.6);
+}
+
+.cta-band .waitlist-status {
+  color: var(--accent-light);
+}
+
+.cta-band .waitlist-form input[type='email'] {
+  border-color: rgba(247, 242, 231, 0.25);
+  background: rgba(247, 242, 231, 0.08);
+  color: var(--bg);
+}
+
+.cta-band .waitlist-form input[type='email']::placeholder {
+  color: rgba(247, 242, 231, 0.5);
+}
+
+form.is-submitted .waitlist-form {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .waitlist-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

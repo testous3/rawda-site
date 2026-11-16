@@ -120,7 +120,7 @@
     langSwitcher.querySelectorAll('.lang-menu a').forEach(function (link) {
       link.addEventListener('click', function () {
         try {
-          localStorage.setItem('talvo-lang-choice', '1');
+          localStorage.setItem('rawda-lang-choice', '1');
         } catch (err) {
           /* localStorage unavailable (private mode, etc.) - not critical, the click still navigates. */
         }
@@ -145,4 +145,35 @@
       heroVisual.style.transform = '';
     });
   }
+
+  // Waitlist email capture (app isn't on the stores yet) - posts to Formspree via fetch so the
+  // page never navigates away; falls back to a normal form POST if fetch/JS is unavailable.
+  document.querySelectorAll('form.waitlist-form').forEach(function (form) {
+    var status = form.querySelector('.waitlist-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var button = form.querySelector('button[type="submit"]');
+      if (button) button.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+        .then(function (res) {
+          if (res.ok) {
+            form.reset();
+            form.classList.add('is-submitted');
+            if (status) status.textContent = form.dataset.successMessage || '';
+          } else if (status) {
+            status.textContent = form.dataset.errorMessage || '';
+          }
+        })
+        .catch(function () {
+          if (status) status.textContent = form.dataset.errorMessage || '';
+        })
+        .finally(function () {
+          if (button) button.disabled = false;
+        });
+    });
+  });
 })();

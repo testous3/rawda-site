@@ -4,16 +4,18 @@
   <meta charset="UTF-8" />
   <title>Rawda — Affirmations islamiques quotidiennes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Rawda, ton fil quotidien d'affirmations inspirées de la tradition islamique : versets, hadiths, douas et anecdotes, dans une ambiance apaisante." />
+  <meta name="description" content="Rawda, ton fil quotidien d'affirmations inspirées de la tradition islamique : versets, hadiths, douas et miracles scientifiques, dans une ambiance apaisante. Lancement très prochainement." />
   <meta property="og:title" content="Rawda — Affirmations islamiques quotidiennes" />
-  <meta property="og:description" content="Ton fil quotidien d'affirmations inspirées de la tradition islamique." />
-  <meta property="og:image" content="/assets/icon.png" />
+  <meta property="og:description" content="Ton fil quotidien d'affirmations inspirées de la tradition islamique. Lancement très prochainement." />
+  <meta property="og:image" content="assets/icon.png" />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="/assets/favicon.png" />
+  <link rel="icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+  <script src="assets/lang-redirect.js"></script>
 </head>
 <body>
 
@@ -21,13 +23,26 @@
 
   <nav class="nav">
     <div class="wrap">
-      <a href="/" class="nav-brand">
-        <img src="/assets/icon.png" alt="" />
+      <a href="./" class="nav-brand">
+        <img src="assets/icon.png" alt="" />
         Rawda
       </a>
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
       <div class="nav-links">
-        <a href="/privacy.html">Confidentialité</a>
-        <a href="/terms.html">CGU</a>
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#apercu">Aperçu</a>
+        <a href="privacy.html">Confidentialité</a>
+        <div class="lang-switcher">
+          <button type="button" class="lang-current" aria-haspopup="true" aria-expanded="false">FR</button>
+          <div class="lang-menu">
+            <a href="./" class="active">Français</a>
+            <a href="en/">English</a>
+            <a href="es/">Español</a>
+            <a href="it/">Italiano</a>
+            <a href="de/">Deutsch</a>
+            <a href="ar/">العربية</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -35,29 +50,146 @@
   <header class="hero">
     <div class="wrap">
       <div class="hero-text">
-        <span class="badge"><span class="badge-dot"></span>Disponible sur Android et iOS</span>
-        <h1>Ton fil quotidien d'<span class="accent-word">affirmations</span> islamiques</h1>
-        <p>Versets, hadiths, douas, anecdotes et citations - dans une ambiance visuelle apaisante, à ton rythme.</p>
+        <span class="badge"><span class="badge-dot"></span>Lancement très prochainement</span>
+        <h1>Ton fil quotidien <span class="accent-word">d'affirmations islamiques</span>.</h1>
+        <p class="tagline">Versets, hadiths, douas, miracles scientifiques et rappels — dans une ambiance visuelle apaisante, à ton rythme.</p>
+        <form class="waitlist-form" action="https://formspree.io/f/testous3@gmail.com" method="POST" data-success-message="Merci ! On te préviendra dès le lancement 🌙" data-error-message="Oups, une erreur est survenue. Réessaie dans un instant.">
+          <input type="email" name="email" required placeholder="ton@email.com" aria-label="Adresse email" />
+          <input type="hidden" name="_subject" value="Nouvelle inscription liste d'attente Rawda" />
+          <button type="submit" class="btn btn-primary">Me prévenir au lancement</button>
+        </form>
+        <p class="waitlist-note">Pas de spam — juste un email le jour du lancement.</p>
+        <p class="waitlist-status" role="status"></p>
+        <div class="hero-ctas">
+          <a class="btn btn-ghost" href="#fonctionnalites">Découvrir les fonctionnalités</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-frame">
+          <img src="assets/store-screenshots/screenshot-dua.webp" alt="Aperçu du fil d'affirmations Rawda" loading="lazy" />
+        </div>
       </div>
     </div>
   </header>
 
+  <section>
+    <div class="wrap">
+      <div class="stats reveal-stagger">
+        <div class="reveal">
+          <div class="stat-value" data-count-to="10">0</div>
+          <div class="stat-label">catégories de contenu</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-value" data-count-to="6">0</div>
+          <div class="stat-label">langues disponibles</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-value" data-count-to="0" data-suffix="€">0€</div>
+          <div class="stat-label">pour commencer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fonctionnalites">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Fonctionnalités</span>
+        <h2>Tout ce qu'il faut pour nourrir ton quotidien spirituel</h2>
+        <p>Rawda est gratuit, avec des options premium.</p>
+      </div>
+      <div class="features reveal-stagger">
+        <div class="feature-card reveal">
+          <div class="icon">🕊️</div>
+          <h3>Fil quotidien personnalisé</h3>
+          <p>10 catégories — douas, versets, hadiths, miracles scientifiques, histoire de l'islam, rappels, et plus. Likez, retrouvez-les dans ta bibliothèque.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">🏠</div>
+          <h3>Widgets écran d'accueil &amp; verrouillé</h3>
+          <p>Une affirmation visible sans même ouvrir l'app, personnalisable : couleur, taille et police.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">🌍</div>
+          <h3>Disponible en 6 langues</h3>
+          <p>Français, anglais, espagnol, italien, allemand, arabe — avec un support complet de l'arabe (droite à gauche).</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">🔥</div>
+          <h3>Séries &amp; badges</h3>
+          <p>Reviens chaque jour pour faire grandir ta série, et débloque des badges au fil de ta progression.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">🎨</div>
+          <h3>Thèmes visuels</h3>
+          <p>Personnalise le fond de ton fil avec des packs photo et vidéo (nature, nuit, minimal) ou ta propre photo.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">🎁</div>
+          <h3>Messages-cadeaux par IA</h3>
+          <p>Génère un message islamique unique pour un proche, selon l'occasion et votre lien.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">📊</div>
+          <h3>Suivi de ton humeur</h3>
+          <p>Note ton ressenti chaque jour et observe ta progression dans le temps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apercu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Aperçu</span>
+        <h2>Un fil pensé pour la sérénité</h2>
+        <p>Fais défiler, personnalise, respire.</p>
+      </div>
+      <div class="screenshots-strip reveal-stagger">
+        <div class="phone-frame reveal">
+          <img src="assets/store-screenshots/screenshot-miracle.webp" alt="Miracle scientifique du Coran dans le fil Rawda" loading="lazy" />
+        </div>
+        <div class="phone-frame reveal">
+          <img src="assets/store-screenshots/screenshot-filter.webp" alt="Choix des catégories et génération IA dans Rawda" loading="lazy" />
+        </div>
+        <div class="phone-frame reveal">
+          <img src="assets/store-screenshots/screenshot-theme.webp" alt="Choix du fond visuel du fil dans Rawda" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-band reveal">
+      <h2>Rejoins la liste d'attente</h2>
+      <p>Rawda arrive très prochainement sur Android et l'App Store. Sois parmi les premiers informés.</p>
+      <form class="waitlist-form" action="https://formspree.io/f/testous3@gmail.com" method="POST" data-success-message="Merci ! On te préviendra dès le lancement 🌙" data-error-message="Oups, une erreur est survenue. Réessaie dans un instant.">
+        <input type="email" name="email" required placeholder="ton@email.com" aria-label="Adresse email" />
+        <input type="hidden" name="_subject" value="Nouvelle inscription liste d'attente Rawda" />
+        <button type="submit" class="btn btn-primary">Me prévenir au lancement</button>
+      </form>
+      <p class="waitlist-note">Pas de spam — juste un email le jour du lancement.</p>
+      <p class="waitlist-status" role="status"></p>
+      <a class="btn btn-ghost cta-band-link" href="privacy.html">Politique de confidentialité</a>
+    </div>
+  </section>
+
   <footer>
     <div class="wrap">
-      <a href="/" class="foot-brand">
-        <img src="/assets/icon.png" alt="" />
+      <a href="./" class="foot-brand">
+        <img src="assets/icon.png" alt="" />
         Rawda
       </a>
       <div class="foot-links">
-        <a href="/privacy.html">Politique de confidentialité</a>
-        <a href="/terms.html">Conditions d'utilisation</a>
+        <a href="privacy.html">Politique de confidentialité</a>
+        <a href="terms.html">Conditions d'utilisation</a>
         <a href="mailto:testous3@gmail.com">Contact</a>
       </div>
       <p class="copyright">&copy; 2026 Rawda. Tous droits réservés.</p>
     </div>
   </footer>
 
-  <script src="/assets/site.js"></script>
+  <script src="assets/site.js"></script>
 
 </body>
 </html>
