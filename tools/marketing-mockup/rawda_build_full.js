@@ -1,8 +1,15 @@
 const sharp = require('sharp');
 const TextToSVG = require('text-to-svg');
 
-const CANVAS_W = 1179;
-const CANVAS_H = 2556;
+// 6.9" class, one of the 3 sizes Apple currently accepts for the required iPhone
+// App Store screenshot set (1320x2868 / 1290x2796 / 1260x2736) - using the largest
+// since Apple scales down for smaller display classes automatically.
+const CANVAS_W = 1320;
+const CANVAS_H = 2868;
+// All the layout constants below were tuned against a 1179-wide canvas; scale them
+// instead of re-tuning by hand so the proportions (and the look already approved)
+// stay identical at the new size.
+const SCALE = CANVAS_W / 1179;
 const path = require('path');
 const HEADLINE_FONT = path.join(__dirname, 'fonts', 'PlusJakartaSans_800ExtraBold.ttf');
 const FONT_SEMI = path.join(__dirname, 'fonts', 'Nunito_600SemiBold.ttf');
@@ -11,22 +18,22 @@ async function build({
   srcImg, out, line1, line2,
   textColor = '#2E2A22',
   bgTop = '#F2EADA', bgMid = '#F5EFE2', bgBottom = '#FAF6EE',
-  frameColor = '#fbfaf7', frameStroke = '#B9A27A', frameStrokeWidth = 6,
-  bezel = 28, cropTop = 110, cropBottom = 46, safeArea = 90,
+  frameColor = '#fbfaf7', frameStroke = '#B9A27A', frameStrokeWidth = Math.round(6 * SCALE),
+  bezel = Math.round(28 * SCALE), cropTop = Math.round(110 * SCALE), cropBottom = Math.round(46 * SCALE), safeArea = Math.round(90 * SCALE),
   showIsland = true, showStatusIcons = false,
   iconColor = '#18140F', statusBg = { r: 250, g: 246, b: 237 },
-  phoneSideMargin = 70, phoneTopMargin = 580, headlineTopY = 220,
+  phoneSideMargin = Math.round(70 * SCALE), phoneTopMargin = Math.round(580 * SCALE), headlineTopY = Math.round(220 * SCALE),
 }) {
   const headlineToSVG = TextToSVG.loadSync(HEADLINE_FONT);
   const textToSVGSemi = TextToSVG.loadSync(FONT_SEMI);
 
-  const phoneW = CANVAS_W - phoneSideMargin * 2, phoneH = 2100;
+  const phoneW = CANVAS_W - phoneSideMargin * 2, phoneH = Math.round(2100 * SCALE);
   const phoneX = (CANVAS_W - phoneW) / 2;
   const phoneY = phoneTopMargin;
   const screenW = phoneW - bezel * 2;
   const screenH = phoneH - bezel * 2;
-  const screenRadius = 108;
-  const phoneRadius = 132;
+  const screenRadius = Math.round(108 * SCALE);
+  const phoneRadius = Math.round(132 * SCALE);
 
   const bgSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -39,8 +46,8 @@ async function build({
     <rect width="${CANVAS_W}" height="${CANVAS_H}" fill="url(#bg)"/>
   </svg>`;
 
-  let fontSize = 85;
-  const maxLineWidth = CANVAS_W - 110;
+  let fontSize = Math.round(85 * SCALE);
+  const maxLineWidth = CANVAS_W - Math.round(110 * SCALE);
   for (const line of [line1, line2]) {
     if (!line) continue;
     const m = headlineToSVG.getMetrics(line, { fontSize });
@@ -52,8 +59,9 @@ async function build({
   const p2 = line2 ? headlineToSVG.getD(line2, { ...opts, y: topY + fontSize * 1.28 }) : '';
   const textSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><path d="${p1}" fill="${textColor}"/>${p2 ? `<path d="${p2}" fill="${textColor}"/>` : ''}</svg>`;
 
-  const shadowPad = 50;
-  const shadowSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter></defs><rect x="${phoneX - shadowPad / 2}" y="${phoneY - shadowPad / 2 + 14}" width="${phoneW + shadowPad}" height="${phoneH + shadowPad}" rx="${phoneRadius + 20}" fill="rgba(40,34,24,0.28)" filter="url(#blur)"/></svg>`;
+  const shadowPad = Math.round(50 * SCALE);
+  const shadowBlur = Math.round(30 * SCALE);
+  const shadowSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${shadowBlur}"/></filter></defs><rect x="${phoneX - shadowPad / 2}" y="${phoneY - shadowPad / 2 + 14}" width="${phoneW + shadowPad}" height="${phoneH + shadowPad}" rx="${phoneRadius + Math.round(20 * SCALE)}" fill="rgba(40,34,24,0.28)" filter="url(#blur)"/></svg>`;
 
   const phoneSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${phoneX}" y="${phoneY}" width="${phoneW}" height="${phoneH}" rx="${phoneRadius}" fill="${frameColor}" stroke="${frameStroke}" stroke-width="${frameStrokeWidth}"/></svg>`;
 
@@ -79,12 +87,13 @@ async function build({
     bars += `<rect x="${x}" y="${statusMidY - h/2 + 5}" width="${barW}" height="${h}" rx="2" fill="${iconColor}"/>`;
   });
 
-  const homeIndicatorSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${phoneX + phoneW/2 - 85}" y="${phoneY + phoneH - bezel - 20}" width="170" height="7" rx="3.5" fill="${iconColor}" fill-opacity="0.5"/></svg>`;
+  const homeIndicatorW = Math.round(170 * SCALE), homeIndicatorH = Math.round(7 * SCALE);
+  const homeIndicatorSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${phoneX + phoneW/2 - homeIndicatorW/2}" y="${phoneY + phoneH - bezel - Math.round(20 * SCALE)}" width="${homeIndicatorW}" height="${homeIndicatorH}" rx="${homeIndicatorH/2}" fill="${iconColor}" fill-opacity="0.5"/></svg>`;
 
   const statusBarSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><path d="${timeD}" fill="${iconColor}"/>${battery}${wifi}${bars}</svg>`;
 
-  const islandW = 196, islandH = 56;
-  const islandSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${CANVAS_W/2 - islandW/2}" y="${sy + safeArea/2 - islandH/2 + 6}" width="${islandW}" height="${islandH}" rx="28" fill="#000000"/></svg>`;
+  const islandW = Math.round(196 * SCALE), islandH = Math.round(56 * SCALE);
+  const islandSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${CANVAS_W/2 - islandW/2}" y="${sy + safeArea/2 - islandH/2 + 6}" width="${islandW}" height="${islandH}" rx="${Math.round(28 * SCALE)}" fill="#000000"/></svg>`;
 
   const screenMaskSvg = `<svg width="${screenW}" height="${screenH}" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="${screenW}" height="${screenH}" rx="${screenRadius}" fill="#ffffff"/></svg>`;
 
