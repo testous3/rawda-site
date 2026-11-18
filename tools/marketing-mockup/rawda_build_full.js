@@ -11,7 +11,7 @@ async function build({
   srcImg, out, line1, line2,
   textColor = '#2E2A22',
   bgTop = '#F2EADA', bgMid = '#F5EFE2', bgBottom = '#FAF6EE',
-  frameColor = '#fbfaf7', frameStroke = '#d8d0bf', frameStrokeWidth = 4,
+  frameColor = '#fbfaf7', frameStroke = '#B9A27A', frameStrokeWidth = 6,
   bezel = 28, cropTop = 110, cropBottom = 46, safeArea = 90,
   showIsland = true, showStatusIcons = false,
   iconColor = '#18140F', statusBg = { r: 250, g: 246, b: 237 },
