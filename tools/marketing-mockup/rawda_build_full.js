@@ -15,13 +15,14 @@ async function build({
   bezel = 28, cropTop = 110, cropBottom = 46, safeArea = 90,
   showIsland = true, showStatusIcons = false,
   iconColor = '#18140F', statusBg = { r: 250, g: 246, b: 237 },
+  phoneSideMargin = 70, phoneTopMargin = 580, headlineTopY = 220,
 }) {
   const headlineToSVG = TextToSVG.loadSync(HEADLINE_FONT);
   const textToSVGSemi = TextToSVG.loadSync(FONT_SEMI);
 
-  const phoneW = 1139, phoneH = 2100;
+  const phoneW = CANVAS_W - phoneSideMargin * 2, phoneH = 2100;
   const phoneX = (CANVAS_W - phoneW) / 2;
-  const phoneY = 650;
+  const phoneY = phoneTopMargin;
   const screenW = phoneW - bezel * 2;
   const screenH = phoneH - bezel * 2;
   const screenRadius = 108;
@@ -46,7 +47,7 @@ async function build({
     if (m.width > maxLineWidth) fontSize = Math.min(fontSize, fontSize * maxLineWidth / m.width);
   }
   const opts = { x: CANVAS_W / 2, fontSize, anchor: 'top center' };
-  const topY = 320;
+  const topY = headlineTopY;
   const p1 = headlineToSVG.getD(line1, { ...opts, y: topY });
   const p2 = line2 ? headlineToSVG.getD(line2, { ...opts, y: topY + fontSize * 1.28 }) : '';
   const textSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><path d="${p1}" fill="${textColor}"/>${p2 ? `<path d="${p2}" fill="${textColor}"/>` : ''}</svg>`;
