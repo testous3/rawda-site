@@ -11,7 +11,7 @@ async function build({
   srcImg, out, line1, line2,
   textColor = '#2E2A22',
   bgTop = '#F2EADA', bgMid = '#F5EFE2', bgBottom = '#FAF6EE',
-  frameColor = '#fbfaf7', frameStroke = '#d8d0bf',
+  frameColor = '#fbfaf7', frameStroke = '#d8d0bf', frameStrokeWidth = 4,
   bezel = 28, cropTop = 110, cropBottom = 46, safeArea = 90,
   showIsland = true, showStatusIcons = false,
   iconColor = '#18140F', statusBg = { r: 250, g: 246, b: 237 },
@@ -54,7 +54,7 @@ async function build({
   const shadowPad = 50;
   const shadowSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter></defs><rect x="${phoneX - shadowPad / 2}" y="${phoneY - shadowPad / 2 + 14}" width="${phoneW + shadowPad}" height="${phoneH + shadowPad}" rx="${phoneRadius + 20}" fill="rgba(40,34,24,0.28)" filter="url(#blur)"/></svg>`;
 
-  const phoneSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${phoneX}" y="${phoneY}" width="${phoneW}" height="${phoneH}" rx="${phoneRadius}" fill="${frameColor}" stroke="${frameStroke}" stroke-width="4"/></svg>`;
+  const phoneSvg = `<svg width="${CANVAS_W}" height="${CANVAS_H}" xmlns="http://www.w3.org/2000/svg"><rect x="${phoneX}" y="${phoneY}" width="${phoneW}" height="${phoneH}" rx="${phoneRadius}" fill="${frameColor}" stroke="${frameStroke}" stroke-width="${frameStrokeWidth}"/></svg>`;
 
   const sx = phoneX + bezel, sy = phoneY + bezel;
   const statusMidY = sy + safeArea / 2 + 6;
